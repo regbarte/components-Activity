@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
+import dotenv from "dotenv"
 
+dotenv.config()
 const app = express();
 const prisma = new PrismaClient();
 
@@ -34,6 +36,7 @@ app.get('/names', async (req, res) => {
         res.json(names);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching names' });
+        console.log(error)
     }
 });
 
