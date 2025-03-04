@@ -1,1 +1,1 @@
-Good evening sir! sorry I have to make another repository for my activity 2. I wasn't satisfied and confident in proceeding with my activity 1 as my repository so I have to re do it again. I hope you understand. thank you!
+Good day sir! I have transferred my repository now here to my first activity repository. 
