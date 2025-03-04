@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
 function Heading({ title }: { title: string }) {
@@ -77,7 +79,7 @@ function App() {
       </div>
       {submittedName && <p className="mt-4">Hello, {submittedName}!</p>}
       <div className="mt-6">
-        <h2 className="text-lg font-bold">Saved Names:</h2>
+        <h2 className="text-lg">Saved Names:</h2>
         <ul>
           {names.map((n, index) => (
             <li key={index} className="flex justify-between items-center">
@@ -86,7 +88,7 @@ function App() {
                 onClick={() => handleDelete(n)}
                 className="ml-4 px-2 py-1 bg-red-600 text-white text-sm rounded"
               >
-                Delete
+                <FontAwesomeIcon icon={faTrash} />
               </button>
             </li>
           ))}
