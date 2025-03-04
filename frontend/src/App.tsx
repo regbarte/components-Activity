@@ -38,6 +38,22 @@ function App() {
     }
   };
 
+  const handleDelete = async (nameToDelete: string) => {
+    try {
+      const response = await fetch('http://localhost:5000/delete-name', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nameToDelete }),
+      });
+
+      if (response.ok) {
+        fetchNames(); // Refresh list after deletion
+      }
+    } catch (error) {
+      console.error('Error deleting name:', error);
+    }
+  };
+
   useEffect(() => {
     fetchNames();
   }, []);
@@ -64,7 +80,15 @@ function App() {
         <h2 className="text-lg font-bold">Saved Names:</h2>
         <ul>
           {names.map((n, index) => (
-            <li key={index}>{n}</li>
+            <li key={index} className="flex justify-between items-center">
+              {n}
+              <button
+                onClick={() => handleDelete(n)}
+                className="ml-4 px-2 py-1 bg-red-600 text-white text-sm rounded"
+              >
+                Delete
+              </button>
+            </li>
           ))}
         </ul>
       </div>

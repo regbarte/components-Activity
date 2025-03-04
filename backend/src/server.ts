@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
-import dotenv from "dotenv"
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 const app = express();
 const prisma = new PrismaClient();
 
@@ -16,8 +16,8 @@ app.post('/submit-name', async (req, res) => {
 
     if (!name) {
         res.status(400).json({ error: 'Name is required' });
-    return }
-
+        return;
+    }
 
     try {
         const newEntry = await prisma.user.create({
@@ -36,7 +36,26 @@ app.get('/names', async (req, res) => {
         res.json(names);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching names' });
-        console.log(error)
+        console.log(error);
+    }
+});
+
+// API to delete a name
+app.delete('/delete-name', async (req, res) => {
+    const { name } = req.body;
+
+    if (!name) {
+        res.status(400).json({ error: 'Name is required' });
+        return;
+    }
+
+    try {
+        await prisma.user.deleteMany({
+            where: { name },
+        });
+        res.json({ message: 'Name deleted' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error deleting name' });
     }
 });
 
