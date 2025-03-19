@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model StudentManagement {
+  id                    Int      @id @default(autoincrement())
+  FirstName             String
+  LastName              String
+  GroupName             String
+  Role                  String
+  ExpectedSalary        Float
+  ExpectedDateOfDefense DateTime @db.Date
+}
